@@ -1,2 +1,1 @@
-FinalProj1
-==========
+Our project will be a bullet hell game. On the left side of the screen, there would be an interface that gives the score, how many lives, and the type of shots and what level the shots are.
