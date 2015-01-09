@@ -4,3 +4,5 @@ Our project will be a bullet hell game. On the left side of the screen, there wo
 
 1/7/2015: Added score display and lives display.
           Adding accessors and basics for testing.
+
+1/8/2015: Added Unit Superclass
