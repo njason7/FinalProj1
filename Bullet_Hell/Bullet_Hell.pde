@@ -1,7 +1,7 @@
-int score,bullet_level,lives;
+int score,bullet_level,lives,bullet_spawn;
 int bullety;
-P_Bullets[] playerb;
-E_Bullets[] enemyb;
+ArrayList<P_Bullets> playerb;
+ArrayList<E_Bullets> enemyb;
 
 void setup(){
   background(255);
@@ -13,8 +13,10 @@ void setup(){
   fill(0);
   textSize(24);
   lives = 3;
+  frameRate(30);
   bullety= 0;
-  playerb = new P_Bullets[30];
+  playerb = new ArrayList<P_Bullets>();
+  bullet_spawn = millis();
 }
 
 void draw(){
@@ -45,11 +47,15 @@ void draw(){
   fill(100);
   rect(300,bullety,5,10);  
   bullet_move();
-  for (int i = 0;i<playerb.length;i++){
-    playerb[i] = new P_Bullets(mouseX-50+i*5,mouseY-50-i*2,"FILL");
+  if (millis() - bullet_spawn == 500){
+    bullet_spawn = millis();
+  playerb.add(new P_Bullets(mouseX,mouseY-15,"FILL"));
   }
-  for (int i = 0;i<playerb.length;i++){
-    playerb[i].draw();
+  for (int i = 0;i<playerb.size();i++){
+    playerb.get(i).draw();
+    if (playerb.get(i).gety() <= 0){
+      playerb.remove(i);
+    }
   }
 }
 
