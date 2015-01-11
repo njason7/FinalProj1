@@ -2,6 +2,7 @@ int score,bullet_level,lives,bullet_spawn;
 int bullety;
 ArrayList<P_Bullets> playerb;
 ArrayList<E_Bullets> enemyb;
+Player player;
 
 void setup(){
   background(255);
@@ -17,25 +18,14 @@ void setup(){
   bullety= 0;
   playerb = new ArrayList<P_Bullets>();
   bullet_spawn = millis();
+  player = new Player();
 }
 
 void draw(){
   fill(0);
   background(255);
+  player.display();
   rect(600,0,1,800);
-  if (mouseX<580 && mouseX>20 && mouseY<780){
-    triangle(mouseX-20,mouseY+20,mouseX+20,mouseY+20,mouseX,mouseY-20);
-  }else if (mouseX>=580){
-    if (mouseY<780){
-      triangle(560,mouseY+20,600,mouseY+20,580,mouseY-20);
-    }else{
-      triangle(560,800,600,800,580,760);
-    }
-  }else if (mouseX<=20){
-    triangle(0,mouseY+20,40,mouseY+20,20,mouseY-20);
-  }else if (mouseY>=780){
-    triangle(mouseX-20,800,mouseX+20,800,mouseX,760);
-  }
   text("Score:"+score,700,100);
   score += 1000;
   text("Lives",700,350);

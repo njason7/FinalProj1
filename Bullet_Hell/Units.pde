@@ -1,16 +1,15 @@
 public class Unit
 {
-  protected int health;
-  protected PImage image;
-  protected int xcor;
-  protected int ycor;
-  protected int xmove;
-  protected int ymove;
-  protected int width;
-  protected int height;
+  public int health;
+  public int xcor;
+  public int ycor;
+  public int xmove;
+  public int ymove;
+  public int width;
+  public int height;
 
   public Unit() {}
-  public Unit(int Health, int Xcor, int Ycor, int Xmove, int Ymove, int w, int h, String Image)
+  public Unit(int Health, int Xcor, int Ycor, int Xmove, int Ymove, int w, int h)
   {
     health = Health;
     xcor = Xcor;
@@ -19,8 +18,6 @@ public class Unit
     ymove = Xmove;
     width = w;
     height = h;    
-    image = loadImage(Image);
-    image.resize(w, h);
   }  
   
   public int getHealth() { return health; }
@@ -30,7 +27,7 @@ public class Unit
   public int getYMove() { return ymove; }
   public int getWidth() { return width; }
   public int getHeight() { return height; }
-  public PImage getImage() { return image; }
+
   
   public void setHealth(int health) { health = health; }
   public void setXCor(int xcor) { xcor = xcor; }
@@ -39,6 +36,6 @@ public class Unit
   public void setYMove(int ymove) { ymove = ymove; }
   public void setWidth(int w) { width = w; }
   public void setHeight(int h) { height = h; }
-  public void setImage(PImage image) { image = image; }
+
 }
 
