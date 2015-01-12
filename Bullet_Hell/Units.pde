@@ -20,22 +20,50 @@ public class Unit
     height = h;    
   }  
   
-  public int getHealth() { return health; }
-  public int getXCor() { return xcor; }
-  public int getYCor() { return ycor; }
-  public int getXMove() { return xmove; }
-  public int getYMove() { return ymove; }
-  public int getWidth() { return width; }
-  public int getHeight() { return height; }
+  public int getHealth() { 
+    return health; 
+  }
+  public int getXCor() { 
+    return xcor; 
+  }
+  public int getYCor() { 
+    return ycor;
+  }
+  public int getXMove() { 
+    return xmove; 
+  }
+  public int getYMove() { 
+    return ymove; 
+  }
+  public int getWidth() {
+    return width; 
+  }
+  public int getHeight() { 
+    return height;
+  }
 
   
-  public void setHealth(int health) { health = health; }
-  public void setXCor(int xcor) { xcor = xcor; }
-  public void setYCor(int ycor) { ycor = ycor; }
-  public void setXMove(int xmove) { xmove = xmove; }
-  public void setYMove(int ymove) { ymove = ymove; }
-  public void setWidth(int w) { width = w; }
-  public void setHeight(int h) { height = h; }
+  public void setHealth(int health) { 
+    health = health; 
+  }
+  public void setXCor(int xcor) { 
+    xcor = xcor; 
+  }
+  public void setYCor(int ycor) { 
+    ycor = ycor;
+  }
+  public void setXMove(int xmove) {
+    xmove = xmove; 
+  }
+  public void setYMove(int ymove) { 
+   ymove = ymove; 
+  }
+  public void setWidth(int w) { 
+   width = w;
+  }
+  public void setHeight(int h) { 
+   height = h; 
+  }
 
 }
 
