@@ -12,3 +12,4 @@ Our project will be a bullet hell game. On the left side of the screen, there wo
 1/11/2015: Started Enemy class
            Added game over screen
            
+1/12/2015: Started Enemy bullets
