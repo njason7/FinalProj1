@@ -21,6 +21,7 @@ void setup(){
   bullet_spawn = millis();
   player = new Player();
   enemy = new ArrayList<Enemy>();
+  enemyb = new ArrayList<E_Bullets>();
 }
 
 void draw(){
@@ -57,7 +58,20 @@ void draw(){
   for (Enemy e: enemy){
      e.display();
    }
-    
+   
+   for(E_Bullets eb: enemyb){
+      eb.display(); 
+   }
+   
+   for(E_Bullets eb: enemyb){
+     eb.setXCor(eb.getXCor()+eb.getXMove());
+     eb.setYCor(eb.getYCor()+eb.getYMove()); 
+   }
+   
+  for (Enemy e: enemy){
+     e.setXCor(e.getXCor()+e.getXMove());
+     e.setYCor(e.getYCor()+e.getYMove()); 
+  }
 }
 
 void bullet_move(){
@@ -107,7 +121,8 @@ void useBomb(){
   if (overRect(0,0,600,800) && mousePressed){
    if (player.getBombs()>0){
       player.setBombs(player.getBombs()-1);
-      
+      enemy.clear();
+      playerb.clear();     
    } 
   }
 }
