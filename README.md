@@ -8,3 +8,7 @@ Our project will be a bullet hell game. On the left side of the screen, there wo
 1/8/2015: Added Unit Superclass
 
 1/10/2015: Created Player class
+
+1/11/2015: Started Enemy class
+           Added game over screen
+           
