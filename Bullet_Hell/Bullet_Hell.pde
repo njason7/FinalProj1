@@ -1,4 +1,4 @@
-int score,bullet_level,lives,bullet_spawn;
+int score,bullet_level,lives,bullet_time;
 int bullety;
 ArrayList<Enemy> enemy;
 ArrayList<P_Bullets> playerb;
@@ -17,8 +17,8 @@ void setup(){
   lives = 3;
   frameRate(30);
   bullety= 0;
+  bullet_time = second();
   playerb = new ArrayList<P_Bullets>();
-  bullet_spawn = millis();
   player = new Player();
   enemy = new ArrayList<Enemy>();
   enemyb = new ArrayList<E_Bullets>();
@@ -37,12 +37,14 @@ void draw(){
     triangle(670+15,430-15,730-15,430-15,700,370+15);
     triangle(720+15,430-15,780-15,430-15,750,370+15);    
   }
-  fill(100);
-  rect(300,bullety,5,10);  
-  bullet_move();
-  if (millis() - bullet_spawn == 500){
-    bullet_spawn = millis();
-  playerb.add(new P_Bullets(mouseX,mouseY-15,"FILL"));
+  fill(100); 
+  bullet_time = millis();
+  if (bullet_time%500 < 35){
+    if(mouseX<600){
+      playerb.add(new P_Bullets(mouseX,mouseY-15,"FILL"));
+    }else{
+      playerb.add(new P_Bullets(585,mouseY-15,"FILL"));
+    }
   }
   for (int i = 0;i<playerb.size();i++){
     playerb.get(i).draw();
@@ -73,14 +75,6 @@ void draw(){
      e.setYCor(e.getYCor()+e.getYMove()); 
   }
 }
-
-void bullet_move(){
-   bullety+=10;
-   if (bullety>790){
-     bullety = 0;
-      rect(300,bullety,5,10);
-   }
- }
 
 void setScore(int Score){
   score = Score;
