@@ -81,6 +81,61 @@ void draw(){
      e.setXCor(e.getXCor()+e.getXMove());
      e.setYCor(e.getYCor()+e.getYMove()); 
   }
+  
+  //When an enemy is hit
+  
+ for (Enemy e: enemy){
+    for (P_Bullets pb : playerb){
+     
+        float playerBulletCenterX = pb.getx() + ( pb.getx() / 2 );
+        float playerBulletCenterY = pb.gety() + ( pb.gety() / 2 );
+       if ( ( ( playerBulletCenterX >= e.getXCor() ) && ( playerBulletCenterX <= ( e.getXCor() + e.getWidth() ) ) ) &&
+          ( ( playerBulletCenterY >= e.getYCor() ) && ( playerBulletCenterY <= ( e.getYCor() + e.getHeight() ) ) )) {
+            
+            e.setHealth(e.getHealth()-player.getDamage());                    
+          }
+    }
+ }
+ 
+ // remove dead enemies
+ ArrayList<Enemy> removedEnemies = new ArrayList<Enemy>();
+ for (Enemy e: enemy){
+    if (e.getHealth()<=0){
+       setScore(getScore()+1000);
+       removedEnemies.add(e);
+    } 
+    enemy.removeAll(removedEnemies);
+ }
+ 
+ 
+ // When player is hit by enemy bullets
+ 
+ for (E_Bullets eb : enemyb){
+    int enemyBulletCenterX = eb.getXCor() + (eb.getWidth()/2);
+    int enemyBulletCenterY = eb.getYCor() + (eb.getHeight()/2);
+   
+     if ( ( ( enemyBulletCenterX >= player.getXCor() ) && ( enemyBulletCenterX <= ( player.getXCor() + player.getWidth() ) ) ) &&
+        ( ( enemyBulletCenterY >= player.getYCor() ) && ( enemyBulletCenterY <= ( player.getYCor() + player.getHeight() ) ) ) ){
+           player.setLives(player.getLives()-1);
+        } 
+ }
+ 
+// When player is hit by enemies
+for (Enemy e : enemy){
+    int enemyBulletCenterX = e.getXCor() + (e.getWidth()/2);
+    int enemyBulletCenterY = e.getYCor() + (e.getHeight()/2);
+   
+     if ( ( ( enemyBulletCenterX >= player.getXCor() ) && ( enemyBulletCenterX <= ( player.getXCor() + player.getWidth() ) ) ) &&
+        ( ( enemyBulletCenterY >= player.getYCor() ) && ( enemyBulletCenterY <= ( player.getYCor() + player.getHeight() ) ) ) ){
+           player.setLives(player.getLives()-1);           
+        } 
+ }
+  
+  
+}
+
+int getScore(){
+   return score; 
 }
 
 void setScore(int Score){
