@@ -13,3 +13,8 @@ Our project will be a bullet hell game. On the left side of the screen, there wo
            Added game over screen
            
 1/12/2015: Started Enemy bullets
+
+1/13/2015: Started player firing
+
+1/14/2015: Fixed firing and added bullet spreading
+           Enemies and player can get hit by bullets
