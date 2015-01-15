@@ -7,8 +7,14 @@ public class Enemy extends Unit{
           super(Health, Xcor, Ycor, Xmove, Ymove, w, h);
   }
   
+  void move(){
+    setXCor(getXCor()+getXMove());
+    setYCor(getYCor()+getYMove());
+  }
+  
   public void display(){
      fill(0);
+     move();
      rect(getXCor(),getYCor(),getWidth(),getHeight());
   }
 }

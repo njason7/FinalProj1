@@ -13,9 +13,9 @@ public class Unit
   {
     health = Health;
     xcor = Xcor;
-    ycor = Xcor;
+    ycor = Ycor;
     xmove = Xmove;
-    ymove = Xmove;
+    ymove = Ymove;
     width = w;
     height = h;    
   }  
@@ -44,19 +44,19 @@ public class Unit
 
   
   public void setHealth(int health) { 
-    health = health; 
+    this.health = health; 
   }
   public void setXCor(int xcor) { 
-    xcor = xcor; 
+    this.xcor = xcor; 
   }
   public void setYCor(int ycor) { 
-    ycor = ycor;
+    this.ycor = ycor;
   }
   public void setXMove(int xmove) {
-    xmove = xmove; 
+    this.xmove = xmove; 
   }
   public void setYMove(int ymove) { 
-   ymove = ymove; 
+   this.ymove = ymove; 
   }
   public void setWidth(int w) { 
    width = w;

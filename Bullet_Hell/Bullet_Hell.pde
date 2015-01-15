@@ -21,8 +21,11 @@ void setup(){
   player = new Player();
   enemy = new ArrayList<Enemy>();
   enemyb = new ArrayList<E_Bullets>();
-  bullet_level = 3;
-  max = 0;
+  bullet_level = 1;
+  max = 1;
+  for (int i = 0;i<1;i++){
+    enemy.add(new Enemy(1,300,50,0,2,10,10));
+  }
 }
 
 void draw(){
@@ -30,6 +33,7 @@ void draw(){
   background(255);
   player.display();
   rect(600,0,1,800);
+  score = score + 100;
   text("Score:"+score,700,100);
   text("Lives",700,350);
   if (player.getLives()== 3){
@@ -39,6 +43,15 @@ void draw(){
   }
   fill(100); 
   bullet_time = millis();
+  if (score >= 30000){
+    bullet_level = 7;
+  }else if (score >= 15000){
+    bullet_level = 5;
+  }else if (score >= 5000){
+    bullet_level = 3;
+  }else{
+    bullet_level = 1;
+  }
   if (bullet_level == 3 || bullet_level == 5 || bullet_level == 7){
     max = bullet_level;
   }
@@ -59,15 +72,9 @@ void draw(){
       playerb.remove(i);
     }
   }
-  
   if (player.getLives()==0){
     end();
-  }
-  
-  for (Enemy e: enemy){
-     e.display();
-   }
-   
+  } 
    for(E_Bullets eb: enemyb){
       eb.display(); 
    }
@@ -76,29 +83,24 @@ void draw(){
      eb.setXCor(eb.getXCor()+eb.getXMove());
      eb.setYCor(eb.getYCor()+eb.getYMove()); 
    }
-   
-  for (Enemy e: enemy){
-     e.setXCor(e.getXCor()+e.getXMove());
-     e.setYCor(e.getYCor()+e.getYMove()); 
-  }
   
-  //When an enemy is hit
-  
- for (Enemy e: enemy){
-    for (P_Bullets pb : playerb){
+   for (Enemy e: enemy){
+     e.display();
+     for (P_Bullets pb : playerb){
      
-        float playerBulletCenterX = pb.getx() + ( pb.getx() / 2 );
-        float playerBulletCenterY = pb.gety() + ( pb.gety() / 2 );
+        float playerBulletCenterX = pb.getx() + ( 5 / 2 );
+        float playerBulletCenterY = pb.gety() + ( 5 / 2 );
        if ( ( ( playerBulletCenterX >= e.getXCor() ) && ( playerBulletCenterX <= ( e.getXCor() + e.getWidth() ) ) ) &&
           ( ( playerBulletCenterY >= e.getYCor() ) && ( playerBulletCenterY <= ( e.getYCor() + e.getHeight() ) ) )) {
             
             e.setHealth(e.getHealth()-player.getDamage());                    
           }
     }
- }
- 
- // remove dead enemies
- ArrayList<Enemy> removedEnemies = new ArrayList<Enemy>();
+    /*if (e.getHealth()<=0){
+       setScore(getScore()+1000);
+       enemy.remove(e);
+    }
+     ArrayList<Enemy> removedEnemies = new ArrayList<Enemy>();
  for (Enemy e: enemy){
     if (e.getHealth()<=0){
        setScore(getScore()+1000);
@@ -106,7 +108,10 @@ void draw(){
     } 
     enemy.removeAll(removedEnemies);
  }
- 
+    */
+ }
+  
+  
  
  // When player is hit by enemy bullets
  
@@ -121,7 +126,7 @@ void draw(){
  }
  
 // When player is hit by enemies
-for (Enemy e : enemy){
+/*for (Enemy e : enemy){
     int enemyBulletCenterX = e.getXCor() + (e.getWidth()/2);
     int enemyBulletCenterY = e.getYCor() + (e.getHeight()/2);
    
@@ -130,7 +135,7 @@ for (Enemy e : enemy){
            player.setLives(player.getLives()-1);           
         } 
  }
-  
+  */
   
 }
 

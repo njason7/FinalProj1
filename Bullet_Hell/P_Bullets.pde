@@ -13,14 +13,14 @@ class P_Bullets{
   
   void fire(){
     if (type.equals("Spread")){
-      if (type2 == 0){
+      if (type2 == 1){
         x = x - cos(5*PI/12)*float(10);
         y = y - sin(5*PI/12)*float(10);
       }else if (type2 == 2){
         x = x + cos(5*PI/12)*float(10);
         y = y - sin(5*PI/12)*float(10);
-      }else if (type2 == 1){
-        y = y - 10;
+      }else if (type2 == 0){
+        y = y - float(10)*sin(PI/2);
       }else if (type2 == 3){
         x = x - cos(PI/3)*float(10);
         y = y - sin(PI/3)*float(10);
