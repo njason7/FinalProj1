@@ -33,7 +33,6 @@ void draw(){
   background(255);
   player.display();
   rect(600,0,1,800);
-  score = score + 100;
   text("Score:"+score,700,100);
   text("Lives",700,350);
   if (player.getLives()== 3){
@@ -79,13 +78,64 @@ void draw(){
       eb.display(); 
    }
    
+   for(Enemy e: enemy){
+      e.display(); 
+   }
+  
+// removes dead enemies
+    ArrayList<Enemy> removeEnemies = new ArrayList<Enemy>();
+    for (Enemy e : enemy)
+    {
+      if (e.getHealth()<=0){
+        removeEnemies.add(e);
+        setScore(getScore()+100);
+      }
+    }
+    enemy.removeAll(removeEnemies);
+
+// removes enemies out of bounds
+    ArrayList<Enemy> removeEnemies1 = new ArrayList<Enemy>();
+    for (Enemy e : enemy)
+    {
+      if ( ( (e.getXCor() > 600) || (e.getXCor() < 0) ) ||
+        ( (e.getYCor() > height) || (e.getYCor() < 0) )){
+        removeEnemies.add(e);
+        }
+    }
+    enemy.removeAll(removeEnemies);
+
+// removes player bullets out of bounds
+    ArrayList<P_Bullets> removePlayerBullets = new ArrayList<P_Bullets>();
+    for (P_Bullets pb: playerb)
+    {
+      if ( ( (pb.getx() > 600) || (pb.getx() < 0) ) ||
+        ( (pb.gety() > height) || (pb.gety() < 0) )) {
+          
+        removePlayerBullets.add(pb);
+        }
+    }
+    playerb.removeAll(removePlayerBullets);
+
+// removes enemy bullets out of bounds
+    ArrayList<E_Bullets> removeEnemyBullets = new ArrayList<E_Bullets>();
+    for (E_Bullets eb: enemyb)
+    {
+      if ( ( (eb.getXCor() > 600) || (eb.getXCor() < 0) ) ||
+        ( (eb.getYCor() > height) || (eb.getYCor() < 0) )) {
+          
+        removeEnemyBullets.add(eb);
+        }
+    }
+    enemyb.removeAll(removeEnemyBullets);
+
+
    for(E_Bullets eb: enemyb){
      eb.setXCor(eb.getXCor()+eb.getXMove());
      eb.setYCor(eb.getYCor()+eb.getYMove()); 
    }
   
+  // Enemy gets hit by player bullets
    for (Enemy e: enemy){
-     e.display();
      for (P_Bullets pb : playerb){
      
         float playerBulletCenterX = pb.getx() + ( 5 / 2 );
@@ -93,23 +143,15 @@ void draw(){
        if ( ( ( playerBulletCenterX >= e.getXCor() ) && ( playerBulletCenterX <= ( e.getXCor() + e.getWidth() ) ) ) &&
           ( ( playerBulletCenterY >= e.getYCor() ) && ( playerBulletCenterY <= ( e.getYCor() + e.getHeight() ) ) )) {
             
-            e.setHealth(e.getHealth()-player.getDamage());                    
+            e.setHealth(e.getHealth()-player.getDamage());   
+             
           }
     }
-    /*if (e.getHealth()<=0){
-       setScore(getScore()+1000);
-       enemy.remove(e);
-    }
-     ArrayList<Enemy> removedEnemies = new ArrayList<Enemy>();
- for (Enemy e: enemy){
-    if (e.getHealth()<=0){
-       setScore(getScore()+1000);
-       removedEnemies.add(e);
-    } 
-    enemy.removeAll(removedEnemies);
- }
-    */
- }
+    
+   }
+
+   
+ 
   
   
  
@@ -126,17 +168,18 @@ void draw(){
  }
  
 // When player is hit by enemies
-/*for (Enemy e : enemy){
-    int enemyBulletCenterX = e.getXCor() + (e.getWidth()/2);
-    int enemyBulletCenterY = e.getYCor() + (e.getHeight()/2);
+for (Enemy e : enemy){
+    int enemyCenterX = e.getXCor() + (e.getWidth()/2);
+    int enemyCenterY = e.getYCor() + (e.getHeight()/2);
    
-     if ( ( ( enemyBulletCenterX >= player.getXCor() ) && ( enemyBulletCenterX <= ( player.getXCor() + player.getWidth() ) ) ) &&
-        ( ( enemyBulletCenterY >= player.getYCor() ) && ( enemyBulletCenterY <= ( player.getYCor() + player.getHeight() ) ) ) ){
-           player.setLives(player.getLives()-1);           
+     if ( ( ( enemyCenterX >= mouseX-15 ) && ( enemyCenterX <= ( mouseX + 15 ) ) ) &&
+        ( ( enemyCenterY >= mouseY-15 ) && ( enemyCenterY <= ( mouseY + 15 ) ) ) ){
+          e.setHealth(0);
+          
         } 
  }
-  */
-  
+
+  enemy.add(new Enemy());
 }
 
 int getScore(){
