@@ -39,6 +39,11 @@ public class Player extends Unit{
   damage =  Damage;
  }
  
+ public void displayLives(){
+   for (int i = 0;i<lives;i++){
+    triangle(670+((i-1)*50)+15,430-15,730+((i-1)*50)-15,430-15,700+((i-1)*50),370+15);
+  }
+ }
 
  public void display() {
     fill(0);

@@ -23,23 +23,17 @@ void setup(){
   enemyb = new ArrayList<E_Bullets>();
   bullet_level = 1;
   max = 1;
-  for (int i = 0;i<1;i++){
-    enemy.add(new Enemy(1,300,50,0,2,10,10));
-  }
 }
 
 void draw(){
   fill(0);
   background(255);
+  if (player.getLives() > 0){
   player.display();
   rect(600,0,1,800);
   text("Score:"+score,700,100);
   text("Lives",700,350);
-  if (player.getLives()== 3){
-    triangle(620+15,430-15,680-15,430-15,650,370+15);
-    triangle(670+15,430-15,730-15,430-15,700,370+15);
-    triangle(720+15,430-15,780-15,430-15,750,370+15);    
-  }
+  player.displayLives();
   fill(100); 
   bullet_time = millis();
   if (score >= 30000){
@@ -71,9 +65,6 @@ void draw(){
       playerb.remove(i);
     }
   }
-  if (player.getLives()==0){
-    end();
-  } 
    for(E_Bullets eb: enemyb){
       eb.display(); 
    }
@@ -128,33 +119,31 @@ void draw(){
     }
     enemyb.removeAll(removeEnemyBullets);
 
-
    for(E_Bullets eb: enemyb){
      eb.setXCor(eb.getXCor()+eb.getXMove());
      eb.setYCor(eb.getYCor()+eb.getYMove()); 
    }
   
   // Enemy gets hit by player bullets
+  ArrayList<P_Bullets> removePlayerBullets2 = new ArrayList<P_Bullets>();
    for (Enemy e: enemy){
      for (P_Bullets pb : playerb){
-     
         float playerBulletCenterX = pb.getx() + ( 5 / 2 );
         float playerBulletCenterY = pb.gety() + ( 5 / 2 );
        if ( ( ( playerBulletCenterX >= e.getXCor() ) && ( playerBulletCenterX <= ( e.getXCor() + e.getWidth() ) ) ) &&
           ( ( playerBulletCenterY >= e.getYCor() ) && ( playerBulletCenterY <= ( e.getYCor() + e.getHeight() ) ) )) {
             
             e.setHealth(e.getHealth()-player.getDamage());   
-             
+            removePlayerBullets2.add(pb);
           }
     }
-    
+    playerb.removeAll(removePlayerBullets2);
    }
+  }else if (player.getLives()<=0){
+    end();
+  }  
 
-   
- 
-  
-  
- 
+       
  /// When player is hit by enemy bullets
  
  for (E_Bullets eb : enemyb){
@@ -168,16 +157,17 @@ void draw(){
  }
  
 // When player is hit by enemies
-for (Enemy e : enemy){
+  for (Enemy e : enemy){
     int enemyCenterX = e.getXCor() + (e.getWidth()/2);
     int enemyCenterY = e.getYCor() + (e.getHeight()/2);
    
      if ( ( ( enemyCenterX >= mouseX-15 ) && ( enemyCenterX <= ( mouseX + 15 ) ) ) &&
         ( ( enemyCenterY >= mouseY-15 ) && ( enemyCenterY <= ( mouseY + 15 ) ) ) ){
           e.setHealth(0);
-          
+          player.setLives(player.getLives()-1);
         } 
  }
+
 
   enemy.add(new Enemy());
 }
@@ -221,12 +211,15 @@ boolean overRect(int x, int y, int width, int height)  {
   }
 }
 
+void mousePressed(){
+  useBomb();
+}
+
 void useBomb(){
-  if (overRect(0,0,600,800) && mousePressed){
-   if (player.getBombs()>0){
+  if (player.getBombs()>0){
       player.setBombs(player.getBombs()-1);
-      enemy.clear();
-      playerb.clear();     
+      for (Enemy e : enemy){
+        e.setHealth(0);
+      } 
    } 
-  }
 }
