@@ -155,7 +155,7 @@ void draw(){
   
   
  
- // When player is hit by enemy bullets
+ /// When player is hit by enemy bullets
  
  for (E_Bullets eb : enemyb){
     int enemyBulletCenterX = eb.getXCor() + (eb.getWidth()/2);

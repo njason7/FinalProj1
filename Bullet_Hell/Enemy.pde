@@ -1,6 +1,6 @@
 public class Enemy extends Unit{
   public Enemy(){
-    super(1, (int) random(550), 0, 0, 3, 20, 20);
+    super(10, (int) random(550), 0, 0, 3, 20, 20);
   }
   
   public Enemy(int Health, int Xcor, int Ycor, int Xmove, int Ymove, int w, int h){

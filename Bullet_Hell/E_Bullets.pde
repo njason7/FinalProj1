@@ -9,6 +9,7 @@ class E_Bullets extends Unit{
   
   public void display(){
      fill(255,0,0);
+     
      ellipse(getXCor(),getYCor(),getWidth(),getHeight());
   }
   
