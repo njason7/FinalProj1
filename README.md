@@ -18,3 +18,9 @@ Our project will be a bullet hell game. On the left side of the screen, there wo
 
 1/14/2015: Fixed firing and added bullet spreading
            Enemies and player can get hit by bullets
+
+1/15/2015: Bug Fixes
+           Enemy death visual fixed
+           Enemies are removed when 0 health or out of bounds
+           Bullets are removed when out of bounds
+           
