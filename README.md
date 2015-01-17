@@ -24,3 +24,7 @@ Our project will be a bullet hell game. On the left side of the screen, there wo
            Enemies are removed when 0 health or out of bounds
            Bullets are removed when out of bounds
            
+1/16/2015: Game over screen fixed
+           Player loses lives properly
+           Bullets are removed when enemy is hit
+           
