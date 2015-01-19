@@ -27,4 +27,11 @@ Our project will be a bullet hell game. On the left side of the screen, there wo
 1/16/2015: Game over screen fixed
            Player loses lives properly
            Bullets are removed when enemy is hit
+
+1/17/2015  Shooting bug and enemy fixes
+
+1/19/2015  Added Levels
+           Added ticks
+           Added different enemies
+           
            
