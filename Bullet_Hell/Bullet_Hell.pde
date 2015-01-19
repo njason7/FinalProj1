@@ -4,7 +4,8 @@ ArrayList<Enemy> enemy;
 ArrayList<P_Bullets> playerb;
 ArrayList<E_Bullets> enemyb;
 Player player;
-
+boolean level1, level2, level3, level4, BossLevel;
+int startTime, ticks;
 void setup(){
   background(255);
   size(800,800);
@@ -23,6 +24,13 @@ void setup(){
   enemyb = new ArrayList<E_Bullets>();
   bullet_level = 1;
   max = 1;
+  startTime = millis()/1000;
+  ticks = startTime;
+  level1 = true;
+  level2 = false;
+  level3 = false;
+  level4 = false;
+  BossLevel = false;
 }
 
 void draw(){
@@ -92,6 +100,10 @@ void draw(){
         removeEnemies.add(e);
         setScore(getScore()+100);
       }
+            if (e.getHealth()<=0){
+        removeEnemies.add(e);
+        setScore(getScore()+100);
+      }
     }
     enemy.removeAll(removeEnemies);
     
@@ -101,7 +113,7 @@ void draw(){
     ArrayList<Enemy> removeEnemies1 = new ArrayList<Enemy>();
     for (Enemy e : enemy)
     {
-      if ( ( (e.getXCor() > 600) || (e.getXCor() < 0) ) ||
+      if ( ( (e.getXCor() > (600-e.getWidth())) || (e.getXCor() < 0) ) ||
         ( (e.getYCor() > height) || (e.getYCor() < 0) )){
         removeEnemies.add(e);
         }
@@ -186,13 +198,176 @@ ArrayList<E_Bullets> removeEnemyBullets2 = new ArrayList<E_Bullets>();
           player.setLives(player.getLives()-1);
         } 
  }
-
-  if (millis() % 500 < 20){
-    enemy.add(new Enemy());
-  }
+  
+  level1 = true;
+  level2 = false;
+  level3 = false;
+  level4 = false;
+  BossLevel = false;
   
 
+  if (level1){
+     level1(); 
+  }
+  if (level2){
+     level2(); 
+  }
+  if (level3){
+     level3(); 
+  }
+  if (level4){
+     level4(); 
+  }
+  if (BossLevel){
+    BossLevel(); 
+  }
 
+
+}
+
+void timeIncrease(){
+   ticks = (millis()/1000) - startTime; 
+}
+  
+// 30 seconds of duds, very little chance of shooters or tanks
+void level1(){
+    Enemy e = new Enemy();
+    timeIncrease();
+    if (ticks < 3){
+       fill(0,0,255);
+       text("LEVEL 1", width/2-100, height/2); 
+    }
+    if (ticks<30){
+      if (millis() % 500 < 100){
+         enemy.add(e); 
+      }    
+      if (millis() % 500 < 2){
+         enemy.add(e.new shooter()); 
+      }  
+      if (millis() % 500 < 2){
+         enemy.add(e.new tank()); 
+      }  
+    } else {
+     level1 = false;
+     level2 = true;
+   } 
+}
+
+
+void level2(){
+    Enemy e = new Enemy();
+    timeIncrease();
+    if (ticks>0 && ticks<35){
+       fill(0,0,255);
+       text("LEVEL 2", width/2-100, height/2);      
+    }
+    if (ticks>35 && ticks<90){
+      if (millis() % 500 < 120){
+         enemy.add(e); 
+      }    
+      if (millis() % 500 < 8){
+         enemy.add(e.new shooter()); 
+      }  
+      if (millis() % 500 < 7){
+         enemy.add(e.new tank()); 
+      }
+      if (millis() % 500 < 3){
+         enemy.add(e.new shooter2()); 
+      }      
+      if (millis() % 500 < 3){
+         enemy.add(e.new shooter3()); 
+      }        
+    } else {
+     level2 = false;
+     level3 = true;
+   }    
+}
+
+void level3(){
+    Enemy e = new Enemy();
+    timeIncrease();
+    if (ticks>90 && ticks<94){
+       fill(0,0,255);
+       text("LEVEL 3", width/2-100, height/2);      
+    }    
+    if (ticks>94 && ticks < 155){
+      if (millis() % 500 < 150){
+         enemy.add(e); 
+      }    
+      if (millis() % 500 < 10){
+         enemy.add(e.new shooter()); 
+      }  
+      if (millis() % 500 < 9){
+         enemy.add(e.new tank()); 
+      }
+      if (millis() % 500 < 4){
+         enemy.add(e.new shooter2()); 
+      }  
+      if (millis() % 500 < 4){
+         enemy.add(e.new shooter3()); 
+      }         
+    } else {
+     level3 = false;
+     level4 = true;
+   }   
+}
+
+void level4(){
+    Enemy e = new Enemy();
+    timeIncrease();
+    if (ticks>155 && ticks<159){
+       fill(0,0,255);
+       text("LEVEL 4", width/2-100, height/2);      
+    }
+    if (ticks>159 && ticks<210 ){
+      if (millis() % 500 < 170){
+         enemy.add(e); 
+      }    
+      if (millis() % 500 < 20){
+         enemy.add(e.new shooter()); 
+      }  
+      if (millis() % 500 < 15){
+         enemy.add(e.new tank()); 
+      }
+      if (millis() % 500 < 10){
+         enemy.add(e.new shooter2()); 
+      }  
+      if (millis() % 500 < 10){
+         enemy.add(e.new shooter3()); 
+      }
+      
+    } else {
+     level4 = false;
+     BossLevel = true;
+   }    
+}
+
+void BossLevel(){
+    Enemy e = new Enemy();
+    timeIncrease();
+    if (ticks>210 && ticks<214){
+       fill(0,0,255);
+       text("FINAL LEVEL", width/2-100, height/2);      
+    }
+    if (ticks>214 && ticks<270){
+      if (millis() % 500 < 200){
+         enemy.add(e); 
+      }    
+      if (millis() % 500 < 30){
+         enemy.add(e.new shooter()); 
+      }  
+      if (millis() % 500 < 30){
+         enemy.add(e.new tank()); 
+      }
+      if (millis() % 500 < 10){
+         enemy.add(e.new shooter2()); 
+      }  
+      if (millis() % 500 < 10){
+         enemy.add(e.new shooter3()); 
+      }
+    } else {
+     BossLevel = false;
+   }   
 }
 
 int getScore(){
