@@ -236,7 +236,7 @@ void level1(){
     if (ticks < 3){
        fill(0,0,255);
        text("LEVEL 1", width/2-100, height/2); 
-    }
+    }   
     if (ticks<30){
       if (millis() % 500 < 100){
          enemy.add(e); 
@@ -349,6 +349,9 @@ void BossLevel(){
        fill(0,0,255);
        text("FINAL LEVEL", width/2-100, height/2);      
     }
+    if (ticks == 275){
+       enemy.add(e.new Boss()); 
+    }
     if (ticks>214 && ticks<270){
       if (millis() % 500 < 200){
          enemy.add(e); 
@@ -415,6 +418,7 @@ boolean overRect(int x, int y, int width, int height)  {
 void mousePressed(){
   useBomb();
 }
+
 
 void useBomb(){
   if (player.getBombs()>0){

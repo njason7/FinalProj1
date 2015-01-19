@@ -112,18 +112,37 @@ public class Enemy extends Unit{
        shoot();
        rect(getXCor(),getYCor(),getWidth(),getHeight());
      }
-    }     
+    }    
   }
   
-  public void shoot(){
-  }
+ public class Boss extends Enemy{
+     public Boss(){
+        super(10, 100, 0, 0 , 0 , 400 , 200);
+     } 
+     public Boss(int xCor, int yCor){
+       super(10, xCor, yCor, 0, 1 ,60, 60);
+     }    
+    public void display(){     
+      if (getHealth()>0){
+       fill(255,100,100);
+       move();
+       shoot();
+       rect(getXCor(),getYCor(),getWidth(),getHeight());
+     }
+    }
+    
+     
+  }  
+  
   
   
   void move(){
     setXCor(getXCor()+getXMove());
     setYCor(getYCor()+getYMove());
   }
-  
+
+  public void shoot(){
+  }  
   
   public void display(){
      if (getHealth()>0){
