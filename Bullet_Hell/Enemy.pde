@@ -28,7 +28,7 @@ public class Enemy extends Unit{
      public void shoot(){
         bullet_time = millis();
          if (bullet_time%500 < 35){
-         enemyb.add( new E_Bullets(getXCor()+(getWidth()/2), getYCor()+getHeight(), 0, 5));
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth()/2)), getYCor()+getHeight(), (int) random(5)-2, 5));
          }
      }
     public void display(){
@@ -52,9 +52,9 @@ public class Enemy extends Unit{
      public void shoot(){
         bullet_time = millis();
          if (bullet_time%500 < 35){
-         enemyb.add( new E_Bullets(getXCor()+(getWidth()/2), getYCor()+getHeight(), -2, 5));
-         enemyb.add( new E_Bullets(getXCor()+(getWidth()/2), getYCor()+getHeight(), 2, 5));
-         enemyb.add( new E_Bullets(getXCor()+(getWidth()/2), getYCor()+getHeight(), 0, 5));
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth()/2)), getYCor()+getHeight(), (int) random(5)-2, 5));
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth()/2)), getYCor()+getHeight(), (int) random(5)-2, 5));
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth()/2)), getYCor()+getHeight(),(int) random(5)-2, 5));
          }
      }    
      
@@ -79,10 +79,10 @@ public class Enemy extends Unit{
      public void shoot(){
         bullet_time = millis();
          if (bullet_time%500 < 35){
-         enemyb.add( new E_Bullets(getXCor()+(getWidth()/2), getYCor()+(getHeight()/2), 0, 5));
-         enemyb.add( new E_Bullets(getXCor()+(getWidth()/2), getYCor()+(getHeight()/2), 0, -5));
-         enemyb.add( new E_Bullets(getXCor()+(getWidth()/2), getYCor()+(getHeight()/2), 5, 0));
-         enemyb.add( new E_Bullets(getXCor()+(getWidth()/2), getYCor()+(getHeight()/2), -5, 0));
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth()/2)), getYCor()+(getHeight()/2), 0, 5));
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth()/2)), getYCor()+(getHeight()/2), 0, -5));
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth()/2)), getYCor()+(getHeight()/2), 5, 0));
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth()/2)), getYCor()+(getHeight()/2), -5, 0));
          }
      }
      public void display(){
@@ -99,10 +99,10 @@ public class Enemy extends Unit{
   
   public class tank extends Enemy{
      public tank(){
-        super(100, (int) random(550), 0, 0 , 1, 60 , 60);
+        super(60, (int) random(550), 0, 0 , 1, 60 , 60);
      } 
      public tank(int xCor, int yCor){
-       super(100, xCor, yCor, 0, 1 ,60, 60);
+       super(60, xCor, yCor, 0, 1 ,60, 60);
      }
     
     public void display(){

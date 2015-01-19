@@ -241,7 +241,7 @@ void level1(){
       if (millis() % 500 < 100){
          enemy.add(e); 
       }    
-      if (millis() % 500 < 2){
+      if (millis() % 500 < 10){
          enemy.add(e.new shooter()); 
       }  
       if (millis() % 500 < 2){
@@ -265,7 +265,7 @@ void level2(){
       if (millis() % 500 < 120){
          enemy.add(e); 
       }    
-      if (millis() % 500 < 8){
+      if (millis() % 500 < 15){
          enemy.add(e.new shooter()); 
       }  
       if (millis() % 500 < 7){
@@ -294,7 +294,7 @@ void level3(){
       if (millis() % 500 < 150){
          enemy.add(e); 
       }    
-      if (millis() % 500 < 10){
+      if (millis() % 500 < 20){
          enemy.add(e.new shooter()); 
       }  
       if (millis() % 500 < 9){
@@ -323,7 +323,7 @@ void level4(){
       if (millis() % 500 < 170){
          enemy.add(e); 
       }    
-      if (millis() % 500 < 20){
+      if (millis() % 500 < 25){
          enemy.add(e.new shooter()); 
       }  
       if (millis() % 500 < 15){
