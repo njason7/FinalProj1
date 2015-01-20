@@ -117,10 +117,10 @@ public class Enemy extends Unit{
   
  public class Boss extends Enemy{
      public Boss(){
-        super(10, 100, 0, 0 , 0 , 400 , 200);
+        super(50, 100, 0, 0 , 0 , 400 , 200);
      } 
      public Boss(int xCor, int yCor){
-       super(10, xCor, yCor, 0, 1 ,60, 60);
+       super(50, xCor, yCor, 0, 1 ,60, 60);
      }    
     public void display(){     
       if (getHealth()>0){
@@ -130,6 +130,19 @@ public class Enemy extends Unit{
        rect(getXCor(),getYCor(),getWidth(),getHeight());
      }
     }
+    
+       public void shoot(){
+        bullet_time = millis();
+         if ((bullet_time%500 > 10) && (bullet_time%500 <15)){
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth())), getYCor()+getHeight(), (int) random(5)-2, 5));
+         } 
+          if (bullet_time%500 < 5){
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth())), getYCor()+getHeight(), (int) random(5)-2, 5));
+         } 
+          if ((bullet_time%500 > 25) && (bullet_time%500 <30)){
+         enemyb.add( new E_Bullets(getXCor()+ ((int) random(getWidth())), getYCor()+getHeight(), (int) random(5)-2, 5));
+         }        
+     }
     
      
   }  

@@ -275,12 +275,16 @@ void level1(){
       if (millis() % 500 < 100){
          enemy.add(e); 
       }    
-      if (millis() % 500 < 10){
+      if (millis() % 500 < 15){
          enemy.add(e.new shooter()); 
       }  
-      if (millis() % 500 < 2){
+      if ((millis() % 500 >15) && (millis()%500 <17)){
          enemy.add(e.new tank()); 
-      }  
+      }
+      if ((millis() % 500 >17) && (millis()%500 <19)){
+         enemy.add(e.new shooter2()); 
+      } 
+             
     } else {
      level1 = false;
      level2 = true;
@@ -299,18 +303,18 @@ void level2(){
       if (millis() % 500 < 120){
          enemy.add(e); 
       }    
-      if (millis() % 500 < 15){
+      if (millis() % 500 < 20){
          enemy.add(e.new shooter()); 
       }  
-      if (millis() % 500 < 7){
+      if ((millis() % 500 >20) && (millis()%500 <22)){
          enemy.add(e.new tank()); 
       }
-      if (millis() % 500 < 3){
+      if ((millis() % 500 >22) && (millis()%500 <24)){
          enemy.add(e.new shooter2()); 
-      }      
-      if (millis() % 500 < 3){
+      } 
+      if ((millis() % 500 >24) && (millis()%500 <26)){
          enemy.add(e.new shooter3()); 
-      }        
+      }       
     } else {
      level2 = false;
      level3 = true;
@@ -328,18 +332,18 @@ void level3(){
       if (millis() % 500 < 150){
          enemy.add(e); 
       }    
-      if (millis() % 500 < 20){
+      if (millis() % 500 < 25){
          enemy.add(e.new shooter()); 
       }  
-      if (millis() % 500 < 9){
+      if ((millis() % 500 >25) && (millis()%500 <28)){
          enemy.add(e.new tank()); 
       }
-      if (millis() % 500 < 4){
+      if ((millis() % 500 >28) && (millis()%500 <31)){
          enemy.add(e.new shooter2()); 
-      }  
-      if (millis() % 500 < 4){
+      } 
+      if ((millis() % 500 >31) && (millis()%500 <34)){
          enemy.add(e.new shooter3()); 
-      }         
+      }        
     } else {
      level3 = false;
      level4 = true;
@@ -357,18 +361,18 @@ void level4(){
       if (millis() % 500 < 170){
          enemy.add(e); 
       }    
-      if (millis() % 500 < 25){
+      if (millis() % 500 < 30){
          enemy.add(e.new shooter()); 
       }  
-      if (millis() % 500 < 15){
+      if ((millis() % 500 >30) && (millis()%500 <34)){
          enemy.add(e.new tank()); 
       }
-      if (millis() % 500 < 10){
+      if ((millis() % 500 >34) && (millis()%500 <38)){
          enemy.add(e.new shooter2()); 
-      }  
-      if (millis() % 500 < 10){
+      } 
+      if ((millis() % 500 >38) && (millis()%500 <44)){
          enemy.add(e.new shooter3()); 
-      }
+      } 
       
     } else {
      level4 = false;
@@ -390,18 +394,18 @@ void BossLevel(){
       if (millis() % 500 < 200){
          enemy.add(e); 
       }    
-      if (millis() % 500 < 30){
+      if (millis() % 500 < 35){
          enemy.add(e.new shooter()); 
       }  
-      if (millis() % 500 < 30){
+      if ((millis() % 500 >35) && (millis()%500 <40)){
          enemy.add(e.new tank()); 
       }
-      if (millis() % 500 < 10){
+      if ((millis() % 500 >40) && (millis()%500 <45)){
          enemy.add(e.new shooter2()); 
-      }  
-      if (millis() % 500 < 10){
+      } 
+      if ((millis() % 500 >45) && (millis()%500 <50)){
          enemy.add(e.new shooter3()); 
-      }
+      } 
     } else {
      BossLevel = false;
    }   
@@ -458,7 +462,7 @@ void useBomb(){
   if (player.getBombs()>0){
       player.setBombs(player.getBombs()-1);
       for (Enemy e : enemy){
-        e.setHealth(0);
+        e.setHealth(e.getHealth()-player.getDamage());
       } 
       for (E_Bullets eb: enemyb){
         eb.setHealth(0); 
