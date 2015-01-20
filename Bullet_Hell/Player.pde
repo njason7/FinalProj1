@@ -67,4 +67,11 @@ public class Player extends Unit{
     
   }
   
+  void displayBombs(){
+    for (int i = 0;i<bombs;i++){
+    ellipse(700+((i-1)*50),600,45,45);
+  }
+  
+  }
+  
   }

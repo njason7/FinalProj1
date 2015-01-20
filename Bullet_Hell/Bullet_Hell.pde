@@ -3,6 +3,7 @@ int max;
 ArrayList<Enemy> enemy;
 ArrayList<P_Bullets> playerb;
 ArrayList<E_Bullets> enemyb;
+ArrayList<Upgrade> upgrade;
 Player player;
 boolean level1, level2, level3, level4, BossLevel;
 int startTime, ticks;
@@ -22,6 +23,7 @@ void setup(){
   player = new Player();
   enemy = new ArrayList<Enemy>();
   enemyb = new ArrayList<E_Bullets>();
+  upgrade = new ArrayList<Upgrade>();
   bullet_level = 1;
   max = 1;
   startTime = millis()/1000;
@@ -42,19 +44,16 @@ void draw(){
   text("Score:"+score,700,100);
   text("Lives",700,350);
   player.displayLives();
+  text("Bombs",700,500);
+  player.displayBombs();
   fill(100); 
   bullet_time = millis();
-  if (score >= 30000){
-    bullet_level = 7;
-  }else if (score >= 15000){
-    bullet_level = 5;
-  }else if (score >= 5000){
-    bullet_level = 3;
-  }else{
-    bullet_level = 1;
-  }
-  if (bullet_level == 3 || bullet_level == 5 || bullet_level == 7){
-    max = bullet_level;
+  if (bullet_level >= 50){
+    max = 7;
+  }else if (bullet_level >= 25){
+    max = 5;
+  }else if (bullet_level >= 10){
+    max = 3;
   }
   if (bullet_time%500 < 35){
     if(mouseX<600){
@@ -72,30 +71,28 @@ void draw(){
     if (playerb.get(i).gety() <= 0 || playerb.get(i).getx() >= 600){
       playerb.remove(i);
     }
-  }
+  }  
   
-  
-// display enemy bullets and enemies  
+// display enemy bullets and enemies and upgrades
    for(E_Bullets eb: enemyb){
       eb.display(); 
-
-   }
-   
+   }   
    for(Enemy e: enemy){
       e.display(); 
    }
-
+   for(Upgrade up: upgrade){
+     up.display();
+   }
+   
 // move enemy bullets  
- 
   for(E_Bullets eb: enemyb){
      eb.setXCor(eb.getXCor()+(eb.getXMove()));
      eb.setYCor(eb.getYCor()+(eb.getYMove())); 
    }
    
-// removes dead enemies
+// removes dead enemies and possibly drop upgrades
     ArrayList<Enemy> removeEnemies = new ArrayList<Enemy>();
-    for (Enemy e : enemy)
-    {
+    for (Enemy e : enemy){
       if (e.getHealth()<=0){
         removeEnemies.add(e);
         setScore(getScore()+100);
@@ -105,14 +102,16 @@ void draw(){
         setScore(getScore()+100);
       }
     }
+    for (Enemy e : removeEnemies){
+      if (random(10) < 1){
+        upgrade.add(new Upgrade(1,e.getXCor(),e.getYCor(),0,3,7,5));
+      }
     enemy.removeAll(removeEnemies);
-    
-    
+    }
 
 // removes enemies out of bounds
     ArrayList<Enemy> removeEnemies1 = new ArrayList<Enemy>();
-    for (Enemy e : enemy)
-    {
+    for (Enemy e : enemy){
       if ( ( (e.getXCor() > (600-e.getWidth())) || (e.getXCor() < 0) ) ||
         ( (e.getYCor() > height) || (e.getYCor() < 0) )){
         removeEnemies.add(e);
@@ -122,8 +121,7 @@ void draw(){
 
 // removes player bullets out of bounds
     ArrayList<P_Bullets> removePlayerBullets = new ArrayList<P_Bullets>();
-    for (P_Bullets pb: playerb)
-    {
+    for (P_Bullets pb: playerb){
       if ( ( (pb.getx() > 600) || (pb.getx() < 0) ) ||
         ( (pb.gety() > height) || (pb.gety() < 0) )) {
           
@@ -134,8 +132,7 @@ void draw(){
 
 // removes enemy bullets out of bounds
     ArrayList<E_Bullets> removeEnemyBullets = new ArrayList<E_Bullets>();
-    for (E_Bullets eb: enemyb)
-    {
+    for (E_Bullets eb: enemyb){
       if ( ( (eb.getXCor() > 600) || (eb.getXCor() < 0) ) ||
         ( (eb.getYCor() > height) || (eb.getYCor() < 0) )) {
           
@@ -146,8 +143,7 @@ void draw(){
 
 // remove enemy bullets that hit
 ArrayList<E_Bullets> removeEnemyBullets2 = new ArrayList<E_Bullets>();
-    for (E_Bullets eb : enemyb)
-    {
+    for (E_Bullets eb : enemyb){
       if (eb.getHealth()<=0){
         removeEnemyBullets2.add(eb);
       }
@@ -168,12 +164,8 @@ ArrayList<E_Bullets> removeEnemyBullets2 = new ArrayList<E_Bullets>();
           }
     }
     playerb.removeAll(removePlayerBullets2);
-   }
-  }else if (player.getLives()<=0){
-    end();
-  }  
-
-       
+   }  
+   
  /// player is hit by enemy bullets
   for (E_Bullets eb: enemyb){
       int enemyBulletCenterX = eb.getXCor() + ( eb.getWidth() / 2 );
@@ -196,8 +188,37 @@ ArrayList<E_Bullets> removeEnemyBullets2 = new ArrayList<E_Bullets>();
         ( ( enemyCenterY >= mouseY-15 ) && ( enemyCenterY <= ( mouseY + 15 ) ) ) ){
           e.setHealth(0);
           player.setLives(player.getLives()-1);
-        } 
- }
+        }
+  }
+
+// When player gets upgrade
+  for (Upgrade up : upgrade){
+      int upCenterX = up.getXCor() + ( up.getWidth() / 2 );
+      int upCenterY = up.getYCor() + ( up.getWidth() / 2 );
+
+      if ( ( ( upCenterX >= mouseX-15 ) && ( upCenterX <= ( mouseX+15 ) ) ) &&
+        ( ( upCenterY >= mouseY-15 ) && ( upCenterY <= ( mouseY +15 ) ) ) ){
+          
+          up.setHealth(0);
+        }
+  }
+//Remove upgrades when taken or out of bounds        
+ArrayList<Upgrade> removeUpgrade = new ArrayList<Upgrade>();
+    for (Upgrade up: upgrade){
+      if ( ( (up.getXCor() > 600) || (up.getXCor() < 0) ) ||
+        ( (up.getYCor() > height) || (up.getYCor() < 0) )) {   
+        removeUpgrade.add(up);
+        }
+      if (up.getHealth() == 0){
+        removeUpgrade.add(up);
+        bullet_level++;
+    }
+    }
+    upgrade.removeAll(removeUpgrade);
+  
+  }else if (player.getLives()<=0){
+    end();
+  }
   
   level1 = true;
   level2 = false;
