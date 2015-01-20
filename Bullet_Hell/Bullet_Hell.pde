@@ -1,3 +1,13 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
+AudioPlayer bgm;
+Minim minim;
+
 int score,bullet_level,lives,bullet_time;
 int max;
 ArrayList<Enemy> enemy;
@@ -33,6 +43,9 @@ void setup(){
   level3 = false;
   level4 = false;
   BossLevel = false;
+  minim = new Minim(this);
+  bgm = minim.loadFile("Guiles_theme.mp3");
+  bgm.play();
 }
 
 void draw(){
@@ -407,7 +420,7 @@ void setBullet_level(int Bullet_level){
 }
 
 void end(){
-  {
+    minim.stop();
     background(255);
     textAlign(CENTER);
     fill(0,255,0);
@@ -424,7 +437,7 @@ void end(){
     if (overRect(width/2-80,height/2+50, 160, 80) && mousePressed){
        setup(); 
     }
-  }
+  
 }
 
 boolean overRect(int x, int y, int width, int height)  {
