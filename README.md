@@ -33,5 +33,7 @@ Our project will be a bullet hell game. On the left side of the screen, there wo
 1/19/2015  Added Levels
            Added ticks
            Added different enemies
-           
+1/20/2015 Balanced Enemies spawn
+          Finished Boss
+          Fixed bugs
            
