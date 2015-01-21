@@ -9,7 +9,7 @@ AudioPlayer bgm;
 Minim minim;
 
 int score,bullet_level,lives,bullet_time;
-int max;
+int max,bgm_timer;
 ArrayList<Enemy> enemy;
 ArrayList<P_Bullets> playerb;
 ArrayList<E_Bullets> enemyb;
@@ -46,6 +46,7 @@ void setup(){
   minim = new Minim(this);
   bgm = minim.loadFile("Guiles_theme.mp3");
   bgm.play();
+  bgm_timer = 0;
 }
 
 void draw(){
@@ -225,9 +226,15 @@ ArrayList<Upgrade> removeUpgrade = new ArrayList<Upgrade>();
       if (up.getHealth() == 0){
         removeUpgrade.add(up);
         bullet_level++;
+        score = score + 50;
     }
     }
     upgrade.removeAll(removeUpgrade);
+
+  if (!bgm.isPlaying()){
+    bgm.rewind();
+    bgm.play();
+  }
   
   }else if (player.getLives()<=0){
     end();
